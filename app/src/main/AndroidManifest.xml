@@ -16,9 +16,6 @@
             android:name=".TambahTeman"
             android:exported="false" />
         <activity
-            android:name=".TemanBaru"
-            android:exported="false" />
-        <activity
             android:name=".EditTeman"
             android:exported="false" />
         <activity

@@ -48,42 +48,16 @@ public class TemanAdapter extends RecyclerView.Adapter<TemanAdapter.TemanViewHol
         id = listData.get(position).getId();
         nm = listData.get(position).getNama();
         tlp = listData.get(position).getTelpon();
-        DBController db = new DBController(control);
 
         holder.namaTxt.setTextColor(Color.BLUE);
-        holder.namaTxt.setTextSize(30);
+        holder.namaTxt.setTextSize(20);
         holder.namaTxt.setText(nm);
         holder.telponTxt.setText(tlp);
 
         holder.cardku.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                PopupMenu popupMenu = new PopupMenu(control, holder.cardku);
-                popupMenu.inflate(R.menu.popup_menu);
-                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem Item) {
-                        switch (Item.getItemId()){
-                            case R.id.mnEdit:
-                                Intent i = new Intent(control, EditTeman.class);
-                                i.putExtra("id",id);
-                                i.putExtra("nama",nm);
-                                i.putExtra("telpon",tlp);
-                                control.startActivity(i);
-                                break;
-                            case R.id.mnHapus:
-                                HashMap<String,String > values = new HashMap<>();
-                                values.put("id",id);
-                                db.DeleteData(values);
-                                Intent j = new Intent(control, MainActivity.class);
-                                control.startActivity(j);
-                                break;
-                        }
-                        return true;
-                    }
-                });
-                popupMenu.show();
-                return false;
+                return true;
             }
         });
     }

@@ -29,8 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private TemanAdapter adapter;
-    private ArrayList<Teman> temanArrayList;
-    DBController controller = new DBController(this);
+    private ArrayList<Teman> temanArrayList = new ArrayList<>() ;
     String id, nm, tlp;
     private FloatingActionButton fab;
 
@@ -58,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                Intent intent = new Intent(MainActivity.this,TemanBaru.class);
+                Intent intent = new Intent(MainActivity.this,TambahTeman.class);
                 startActivity(intent);
             }
         });
@@ -97,5 +96,6 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "gagal", Toast.LENGTH_SHORT).show();
             }
         });
+        requestQueue.add(jArr);
     }
 }
