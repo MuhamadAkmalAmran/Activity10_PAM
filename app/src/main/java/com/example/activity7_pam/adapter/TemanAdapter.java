@@ -21,6 +21,7 @@ import com.example.activity7_pam.database.Teman;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class TemanAdapter extends RecyclerView.Adapter<TemanAdapter.TemanViewHolder> {
     private ArrayList<Teman> listData;
@@ -78,5 +79,6 @@ public class TemanAdapter extends RecyclerView.Adapter<TemanAdapter.TemanViewHol
             namaTxt = (TextView) view.findViewById(R.id.textNama);
             telponTxt =(TextView) view.findViewById(R.id.textTelpon);
         }
-    }
+    })
+
 }
