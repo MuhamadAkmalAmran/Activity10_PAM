@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.telecom.Call;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -23,21 +24,23 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class EditTeman extends AppCompatActivity {
     TextView idText;
     EditText edNama, edTelpon;
     Button editBtn;
-    String nma, tlp, id, namaEd, telponEd;
+    String nm, tlp, id, namaEd, telponEd;
     int sukses;
 
-    private static String url_select = "http://10.0.2.2/umyTI/updatetm.php";
+    private static String url_update = "http://10.0.2.2/umyTI/updatetm.php";
     public static final String TAG = EditTeman.class.getSimpleName();
     public static final String TAG_SUCCES = "success";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);        setContentView(R.layout.activity_edit_teman);
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_edit_teman);
 
         idText = findViewById(R.id.textId);
         edNama = findViewById(R.id.edNm);
@@ -72,11 +75,10 @@ public class EditTeman extends AppCompatActivity {
                 Log.d(TAG, "Respon : " + response.toString());
 
                 try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    sukses = jsonObject = jsonObject.getInt(TAG_SUCCES);
+                    JSONObject jObj = new JSONObject(response);
+                    sukses = jObj.getInt(TAG_SUCCES);
                     if (sukses == 1) {
                         Toast.makeText(EditTeman.this, "Sukses mengedit data", Toast.LENGTH_SHORT).show();
-
                     } else {
                         Toast.makeText(EditTeman.this, "gagal", Toast.LENGTH_SHORT).show();
                     }
@@ -91,5 +93,26 @@ public class EditTeman extends AppCompatActivity {
                 Toast.makeText(EditTeman.this, "Gagal Edit data", Toast.LENGTH_SHORT).show();
             }
         })
+        {
+            @Override
+            protected Map<String,String> getParams(){
+                Map<String,String> params = new HashMap<>();
+
+                params.put("id", id);
+                params.put("nama", namaEd);
+                params.put("telpon", telponEd);
+
+                return params;
+            }
+        };
+        requestQueue.add(stringRequest);
+        CallHomeActivity();
+    }
+
+    public void CallHomeActivity()
+    {
+        Intent inten = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(inten);
+        finish();
     }
 }
