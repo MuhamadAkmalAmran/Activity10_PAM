@@ -33,7 +33,7 @@ public class EditTeman extends AppCompatActivity {
     String nm, tlp, id, namaEd, telponEd;
     int sukses;
 
-    private static String url_update = "http://10.0.2.2/umyTI/updatetm.php";
+    private static String url_update = "https://20200140138.praktikumtiumy.com/updatetm.php";
     public static final String TAG = EditTeman.class.getSimpleName();
     public static final String TAG_SUCCES = "success";
 
